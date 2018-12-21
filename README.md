@@ -31,3 +31,24 @@ The development of DeepQuest received funding from the [European Association for
 [5]: http://eamt.org/
 [6]: https://ara.amazon-ml.com/
 [7]: http://aclweb.org/anthology/C18-1266
+
+## How to Use
+### Requirement
+- python 2.7
+
+### Clone
+```bash
+cd
+git clone https://github.com/takatsugu-kato/deepQuest.git
+```
+This repository contains qe-2017 exapmle data.
+### Training
+```bash
+cd deepQuest/quest
+./train-test-sentQEbRNN.sh --task qe-2017 --source src --target mt --score hter --activation sigmoid --device cpu
+```
+### Scoring
+```
+rm -rf config.py
+ln -s ../configs/config-sentQEbRNNEval.py config.py
+```
