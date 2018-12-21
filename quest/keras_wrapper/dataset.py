@@ -1088,6 +1088,7 @@ class Dataset(object):
 
         :return: Preprocessed labels.
         """
+        labels_list = '../' + labels_list
         if isinstance(labels_list, str) and os.path.isfile(labels_list):
             labels = []
             with open(labels_list, 'r') as list_:
@@ -1212,6 +1213,7 @@ class Dataset(object):
         """
         sentences = []
         sentences2d = []
+        annotations_list = '../' + annotations_list;
         if isinstance(annotations_list, str) and os.path.isfile(annotations_list):
             with open(annotations_list, 'r') as list_:
                 sentences_doc = []
@@ -1313,6 +1315,7 @@ class Dataset(object):
         :return: Preprocessed sentences.
         """
         sentences = []
+        annotations_list = '../' + annotations_list;
         if isinstance(annotations_list, str) and os.path.isfile(annotations_list):
             with codecs.open(annotations_list, 'r', 'utf-8') as list_:
                 for line in list_:

@@ -5,7 +5,7 @@ def load_parameters():
     """
 
     # Input data params
-    TASK_NAME = 'qe-2016'                           # Task name
+    TASK_NAME = 'qe-2017'                           # Task name
     DATASET_NAME = TASK_NAME                        # Dataset name
     SRC_LAN = 'src'                                  # Language of the source text
     TRG_LAN = 'mt'                                  # Language of the target text
@@ -24,13 +24,13 @@ def load_parameters():
     #OUTPUTS_IDS_MODEL_FULL = ['target_text','word_qe', 'sent_hter']                     # Corresponding outputs of the built model
     OUTPUTS_IDS_MODEL = ['sent_qe']
     WORD_QE_CLASSES = 5
-    PRED_SCORE='hternorm'
+    PRED_SCORE='hter'
 
     # Evaluation params
     METRICS = ['qe_metrics']                            # Metric used for evaluating the model
     #KERAS_METRICS = ['pearson_corr', 'mae', 'rmse']
     EVAL_ON_SETS = ['test']                        # Possible values: 'train', 'val' and 'test' (external evaluator)
-    NO_REF = False
+    NO_REF = True
     #EVAL_ON_SETS_KERAS = ['val']                       #  Possible values: 'train', 'val' and 'test' (Keras' evaluator). Untested.
     EVAL_ON_SETS_KERAS = []
     START_EVAL_ON_EPOCH = 1                      # First epoch to start the model evaluation
@@ -38,8 +38,8 @@ def load_parameters():
     EVAL_EACH = 1                                 # Sets the evaluation frequency (epochs or updates)
 
     #PRED_VOCAB = '/Users/ive/Documents/nmt-keras/datasets/Dataset_EuTrans_esen.pkl'
-    #PRED_VOCAB = 'euro-en-de-model-latest/Dataset_euro-en-de_ende.pkl'
-    PRED_WEIGHTS='trained_models/qe-2016_srcmt_EncSent_src_emb_300_bidir_True_enc_GRU_50_dec_ConditionalGRU_500_deepout_linear_trg_emb_300_Adadelta_1.0/epoch_3_weights.h5'
+    PRED_VOCAB = './datasets/Dataset_qe-2017_srcmt.pkl'
+    PRED_WEIGHTS='./trained_models/qe-2017_srcmt_EncSent'
     MULTI_TASK = False
 
     # Search parameters
@@ -247,14 +247,14 @@ def load_parameters():
 
     # Results plot and models storing parameters
     EXTRA_NAME = ''                               # This will be appended to the end of the model name
-    MODEL_NAME = TASK_NAME + '_' + SRC_LAN + TRG_LAN + '_' + MODEL_TYPE + \
-                 '_src_emb_' + str(SOURCE_TEXT_EMBEDDING_SIZE) + \
-                 '_bidir_' + str(BIDIRECTIONAL_ENCODER) + \
-                 '_enc_' + ENCODER_RNN_TYPE + '_' + str(ENCODER_HIDDEN_SIZE) + \
-                 '_dec_' + DECODER_RNN_TYPE + '_' + str(DECODER_HIDDEN_SIZE) + \
-                 '_deepout_' + '_'.join([layer[0] for layer in DEEP_OUTPUT_LAYERS]) + \
-                 '_trg_emb_' + str(TARGET_TEXT_EMBEDDING_SIZE) + \
-                 '_' + OPTIMIZER + '_' + str(LR)
+    MODEL_NAME = TASK_NAME + '_' + SRC_LAN + TRG_LAN + '_' + MODEL_TYPE
+#                 '_src_emb_' + str(SOURCE_TEXT_EMBEDDING_SIZE) + \
+#                 '_bidir_' + str(BIDIRECTIONAL_ENCODER) + \
+#                 '_enc_' + ENCODER_RNN_TYPE + '_' + str(ENCODER_HIDDEN_SIZE) + \
+#                 '_dec_' + DECODER_RNN_TYPE + '_' + str(DECODER_HIDDEN_SIZE) + \
+#                 '_deepout_' + '_'.join([layer[0] for layer in DEEP_OUTPUT_LAYERS]) + \
+#                 '_trg_emb_' + str(TARGET_TEXT_EMBEDDING_SIZE) + \
+#                 '_' + OPTIMIZER + '_' + str(LR)
 
     MODEL_NAME += EXTRA_NAME
 
@@ -263,7 +263,7 @@ def load_parameters():
 
     SAMPLING_SAVE_MODE = 'list'                        # 'list': Store in a text file, one sentence per line.
     VERBOSE = 1                                        # Verbosity level
-    RELOAD = 0                                         # If 0 start training from scratch, otherwise the model
+    RELOAD = 1                                         # If 0 start training from scratch, otherwise the model
                                                        # Saved on epoch 'RELOAD' will be used
     RELOAD_EPOCH = True                                # Select whether we reload epoch or update number
 
