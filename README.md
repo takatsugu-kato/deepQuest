@@ -32,7 +32,7 @@ The development of DeepQuest received funding from the [European Association for
 [6]: https://ara.amazon-ml.com/
 [7]: http://aclweb.org/anthology/C18-1266
 
-## How to Use
+## How to Use Example
 ### Requirement
 - python 2.7
 
@@ -51,4 +51,15 @@ cd deepQuest/quest
 ```
 rm -rf config.py
 ln -s ../configs/config-sentQEbRNNEval.py config.py
+THEANO_FLAGS=device=cpu python main.py
 ```
+### Memo
+1. train.srcとtrain.mtを用意する
+2. train.mtをPEしてtrain.peをつくる
+3. train.mtとtrain.peの間の[TER][1]を出し、train.hterとして保存する
+4. 上記を適当なフォルダに配置し、config-sentQEbRNN.pyをそれに合わせて編集する
+5. train-test-sentQEbRNN.shをたたいてTrainingする
+6. Trainingがおわったらconfig-sentQEbRNNEval.pyを適宜編集する
+7. test.mtとtest.srcを用意してScoringを出す
+
+[1]: https://github.com/jhclark/tercom
