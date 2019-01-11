@@ -55,11 +55,33 @@ THEANO_FLAGS=device=cpu python main.py
 ```
 ### Memo
 1. train.srcとtrain.mtを用意する
-2. train.mtをPEしてtrain.peをつくる
-3. train.mtとtrain.peの間の[TER][1]を出し、train.hterとして保存する
-4. 上記を適当なフォルダに配置し、config-sentQEbRNN.pyをそれに合わせて編集する
-5. train-test-sentQEbRNN.shをたたいてTrainingする
-6. Trainingがおわったらconfig-sentQEbRNNEval.pyを適宜編集する
-7. test.mtとtest.srcを用意してScoringを出す
+1. train.mtをPEしてtrain.peをつくる
+1. train.mtとtrain.peの間の[TER][9]([git][8])を出し、train.hterとして保存する
+1. 上記を適当なフォルダに配置し、config-sentQEbRNN.pyをそれに合わせて編集する
+1. train-test-sentQEbRNN.shをたたいてTrainingする
+1. Trainingがおわったらconfig-sentQEbRNNEval.pyを適宜編集する
+1. test.mtとtest.srcを用意してScoringを出す
 
-[1]: https://github.com/jhclark/tercom
+#### TERの出し方
+train.mtとtrain.peを用意し、それぞれの行末にカッコ書きでIDをいれる。
+IDのフォーマットはなんでもよくて、ユニークかつ両ファイル間で対応がとれていればなんでもいい。
+```
+$> cat data/train.mt
+i am nice (hoge1)
+i am good (hoge2)
+i am bad (foo3)
+
+$> cat data/train.pe
+i am nice (hoge1)
+i am good (hoge2)
+i am wild (foo3)
+```
+で、以下をたたくとdataフォルダにter_data.*がいろいろでてくる。
+-rと-hのファイルは逆にしても結果は同じ。
+```
+cd data/
+java -jar ../tercom.jar -r train.pe -h train.mt -n ter_data
+```
+
+[8]: https://github.com/jhclark/tercom
+[9]: http://www.cs.umd.edu/~snover/tercom/
